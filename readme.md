@@ -5,7 +5,7 @@
 
 -----
 This repository provides easy to use access to our HD-MS-Lesions brain lesion segmentation tool.
-HD-GLIO is the result of a joint project between the Department of Neuroradiology at the Heidelberg University Hospital, Germany and the Division of Medical Image Computing at the German Cancer Research Center (DKFZ) Heidelberg, Germany.
+HD-MS-Lesions is the result of a joint project between the Department of Neuroradiology at the Heidelberg University Hospital, Germany and the Division of Medical Image Computing at the German Cancer Research Center (DKFZ) Heidelberg, Germany.
 If you are using HD-MS-Lesions, please cite the following publications:
 
 HD-MS-Lesions was developed with **TBD** MRI images from **TBD** MS patients (**TBD** Datasetsplit , trained in a 5 fold crossvalidation setting)
@@ -19,38 +19,32 @@ We provide two models that are capable to predict MS Lesions for patients that w
 
 -----
 ### Installation Requirements
-HD-MS-lesions only runs on Linux with python3.6 [^1].
-Any GPU with 4 GB of VRAM and cuda/pytorch support will do. Runing the prediction on CPU is not supported.
-
-[^1]: (other versions might work after downloading the [weights](https://zenodo.org/record/4915908) manually and extracting them in the directory specified by `paths.py`
+HD-MS-lesions only runs on Linux with python3.
+Supported python3 versions are python3.6. Python 3.9 doesn't work as downloading of weights breaks. (Might work after downloading the [weights](https://zenodo.org/record/4915908) manually and extracting them in the directory specified by `paths.py`).
+Any GPU with 4 GB of VRAM and cuda/pytorch support will do. Running the prediction on CPU is not supported.
 
 ### Installation with Pip
 Installation with pip is currently not supported but will be added soon.
 
 ### Manual installation
-We generally recommend to create a new virtualenv for every project that is installed, to assert that the different package versions don't get mixed.
+We generally recommend to create a new virtualenv for every project that is installed so package dependencies don't get mixed.
 To test if virtualenv is installed call `virtualenv --version`. This will return something like this: `virtualenv 20.0.17 from <SOME_PATH>` should it be installed.
-If not follow the link under 1 to install virtualenv OR continue without virtualenv.
+([Should it not be installed follow this how-to to install it (Optional).](https://linoxide.com/linux-how-to/setup-python-virtual-environment-ubuntu/))
 
-1. [Optional] We strongly recommend you install ms-lesions in a separate python virtual environment. [Here is a quick how-to for Ubuntu.](https://linoxide.com/linux-how-to/setup-python-virtual-environment-ubuntu/)
-2. (Optional) Create and activate your virtualenv
-3. Clone the repository locally    
-4. Change the directory to the directory containing `hd-ms-lesions`
-5. Install ms-lesions with pip: `pip install ms-lesions/` (or change directory into ms-lesions `cd ms-lesions` and call `pip install .`)
-
-
-```
+#### Installing with a virtualenv
+```shell
 # With virtualenv
-virtualenv ms-lesions-env --python=python3.6
-source ms-lesions-env/bin/activate
+virtualenv HD-MS-Lesions-env --python=python3.6  # Creates a new Virtual environment 
+source HD-MS-Lesions-env/bin/activate  # Activates the environment
 
-git clone git@github.com:NeuroAI-HD/HD-MS-Lesions.git
-pip install HD-MS-Lesions/
+git clone git@github.com:NeuroAI-HD/HD-MS-Lesions.git  # Clones the Repository
+pip install HD-MS-Lesions/  # Install the repository for the current virtualenv
 ```
-```
+#### Installing without virtualenv
+```shell
 # Without virtualenv
-git clone git@github.com:NeuroAI-HD/HD-MS-Lesions.git
-pip3 install HD-MS-Lesions/
+git clone git@github.com:NeuroAI-HD/HD-MS-Lesions.git  # Clones the repository
+pip3 install HD-MS-Lesions/  # Installs the repository for the python3 interpreter
 ```
 
 This will install ms_lesions commands directly onto your system (or the virtualenv). You can use them from anywhere (when the virtualenv is active).
@@ -65,10 +59,10 @@ As these commands are called for the first time the weights for the nnUNet model
 Should you want to change the location where weights are to be stored edit the file located in `/<YOUR_PATH>/ms-lesions/ms_lesions/paths.py`.
 
 ## Prerequisites
-HD-MS-Lesions was trained with four/three MRI modalities: T1, (constrast-enhanced T1), T2 and FLAIR. At least T1, T2 and FLAIR have to exist in order to run HD-MS-Lesions.
+HD-MS-Lesions was trained with three/four MRI modalities: T1, (optional) constrast-enhanced T1, T2 and FLAIR.
 
 All input files must be provided as nifti (.nii.gz) files containing 2D or 3D MRI image data.
-Sequences with multiple temporal volumes (i.e. 4D sequences) are not supported (however can be splitted upfront into the individual temporal volumes using fslsplit1).
+Sequences with multiple temporal volumes (i.e. 4D sequences) are not supported (however can be split upfront into the individual temporal volumes using fslsplit1).
 - T1 inputs must be a T1-weighted sequence before contrast-agent administration (T1-w) acquired as 2D with axial orientation (e.g. TSE) or as 3D (e.g. MPRAGE)
 - cT1 inputs must be a T1-weighted sequence after contrast-agent administration (cT1-w) acquired as 2D with axial orientation (e.g. TSE) or as 3D (e.g. MPRAGE)
 - T2 inputs must be a T2-weighted sequence (T2-w) acquired as 2D
@@ -102,7 +96,7 @@ fsl5.0-flirt -in CT1_reorient_bet.nii.gz -ref T1_reorient_bet.nii.gz -out CT1_re
 fsl5.0-flirt -in T2_reorient_bet.nii.gz -ref T1_reorient.nii.gz -out T2_reorient_bet_reg.nii.gz -dof 6 -interp spline
 fsl5.0-flirt -in FLAIR_reorient_bet.nii.gz -ref T1_reorient.nii.gz -out FLAIR_reorient_bet_reg.nii.gz -dof 6 -interp spline
 
-# reapply T1 brain mask (this is important because HD-GLIO expects non-brain voxels to be 0 and the registration 
+# reapply T1 brain mask (this is important because HD-MS-Lesions expects non-brain voxels to be 0 and the registration 
 process can introduce nonzero values
 # T1_BRAIN_MASK.nii.gz is the mask (not the brain extracted image!) as obtained from HD-Bet
 fsl5.0-fslmaths CT1_reorient_bet_reg.nii.gz -mas T1_BRAIN_MASK.nii.gz CT1_reorient_bet_reg.nii.gz
