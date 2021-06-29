@@ -1,9 +1,7 @@
 # HD-MS-Lesions
 
------ 
 ## Introduction
 
------
 This repository provides easy to use access to our HD-MS-Lesions brain lesion segmentation tool.
 HD-MS-Lesions is the result of a joint project between the Department of Neuroradiology at the Heidelberg University Hospital, Germany and the Division of Medical Image Computing at the German Cancer Research Center (DKFZ) Heidelberg, Germany.
 If you are using HD-MS-Lesions, please cite the following publications:
@@ -17,11 +15,10 @@ We provide two models that are capable to predict MS Lesions for patients that w
 
 ## Installation Instructions
 
------
 ### Installation Requirements
 HD-MS-lesions only runs on Linux with python3.
 Supported python3 versions are python3.6. Python 3.9 doesn't work as downloading of weights breaks. (Might work after downloading the [weights](https://zenodo.org/record/4915908) manually and extracting them in the directory specified by `paths.py`).
-Any GPU with 4 GB of VRAM and cuda/pytorch support will do. Running the prediction on CPU is not supported.
+In order to run a pc with a GPU with at least 4 GB of VRAM and cuda/pytorch support is required. Running the prediction on CPU is not supported.
 
 ### Installation with Pip
 Installation with pip is currently not supported but will be added soon.
@@ -47,16 +44,17 @@ git clone git@github.com:NeuroAI-HD/HD-MS-Lesions.git  # Clones the repository
 pip3 install HD-MS-Lesions/  # Installs the repository for the python3 interpreter
 ```
 
-This will install ms_lesions commands directly onto your system (or the virtualenv). You can use them from anywhere (when the virtualenv is active).
+This will install `HD-MS-Lesions` commands directly onto your system (or the virtualenv). You can use them from anywhere (when the virtualenv is active).
 
 ## How to use it
-
-----
 Using HD-MS-Lesions is straight forward. After installing you can call `ms_lesions_predict` or `ms_lesions_predict_folder` to predict cases imaged with all four MRI modalities or
 call `ms_lesions_noT1ce_predict` or `ms_lesions_noT1ce_predict_folder` to predict cases that are imaged with T1-weighted, T2-weighted and FLAIR MRI sequence.
 
+When predicting cases with all modalities the model will predict CE and Edema lesions, whereas only Edema lesions are predicted for the model without cT1 modality.
+
+
 As these commands are called for the first time the weights for the nnUNet model will be downloaded automatically and saved to your home directory.
-Should you want to change the location where weights are to be stored edit the file located in `/<YOUR_PATH>/ms-lesions/ms_lesions/paths.py`.
+Should you want to change the location where weights are to be stored edit the file located in `/<YOUR_PATH>/HD-MS-Lesions/ms_lesions/paths.py`.
 
 ## Prerequisites
 HD-MS-Lesions was trained with three/four MRI modalities: T1, (optional) constrast-enhanced T1, T2 and FLAIR.
@@ -96,8 +94,7 @@ fsl5.0-flirt -in CT1_reorient_bet.nii.gz -ref T1_reorient_bet.nii.gz -out CT1_re
 fsl5.0-flirt -in T2_reorient_bet.nii.gz -ref T1_reorient.nii.gz -out T2_reorient_bet_reg.nii.gz -dof 6 -interp spline
 fsl5.0-flirt -in FLAIR_reorient_bet.nii.gz -ref T1_reorient.nii.gz -out FLAIR_reorient_bet_reg.nii.gz -dof 6 -interp spline
 
-# reapply T1 brain mask (this is important because HD-MS-Lesions expects non-brain voxels to be 0 and the registration 
-process can introduce nonzero values
+# reapply T1 brain mask (this is important because HD-MS-Lesions expects non-brain voxels to be 0 and the registration process can introduce nonzero values
 # T1_BRAIN_MASK.nii.gz is the mask (not the brain extracted image!) as obtained from HD-Bet
 fsl5.0-fslmaths CT1_reorient_bet_reg.nii.gz -mas T1_BRAIN_MASK.nii.gz CT1_reorient_bet_reg.nii.gz
 fsl5.0-fslmaths T2_reorient_bet_reg.nii.gz -mas T1_BRAIN_MASK.nii.gz T2_reorient_bet_reg.nii.gz
@@ -138,7 +135,6 @@ wait
 ```
 After applying this example you would use T1_reorient.nii.gz, CT1_reorient_reg_bet.nii.gz, T2_reorient_reg_bet.nii.gz and FLAIR_reorient_reg_bet.nii.gz to proceed.
 
------
 ## Run HD-MS-Lesions
 HD-MS-Lesions provides four main scripts: `ms_lesions_predict` and `ms_lesions_predict_folder` for cases where contrast T1, cT1, T2 and FLAIR modalities were imaged.\
 For these cases automatic segmentations for CE and Edema lesions are predicted.
@@ -160,9 +156,9 @@ This can be useful for exploration or if the number of cases to be procesed is l
 
 `ms_lesions_predict -i INPUT_DIR -id ARBITRARY_IMAGE_ID -o OUTPUT_DIR -oid OUTPUT_ID`
 
-`INPUT_DIR` is the directory that contains the images of the patient.
-`ARBITRARY_IMAGE_ID` can be either be only the identifier or any image with/without the `MODALITY_ID`.
-`OUTPUT_DIR` is the output directory to save the image to, if it does not exist it will be created.
+`INPUT_DIR` is the path to the directory that contains the images of the patient.
+`ARBITRARY_IMAGE_ID` can be either only the identifier or any image with/without the `MODALITY_ID`.
+`OUTPUT_DIR` is the path to the output directory to save the image to, if it does not exist all directories that are missing will be created.
 `OUTPUT_ID` is an _optional_ name for the output, if not given the input image ID will be used instead.
 
 For further information use the help option that comes with each command, providing a detailed explanation. (e.g. `ms_lesions_predict --help`).
