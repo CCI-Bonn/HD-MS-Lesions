@@ -1,4 +1,4 @@
-# Installation instructions
+# HD-MS-Lesions
 
 ----- 
 ## Introduction
