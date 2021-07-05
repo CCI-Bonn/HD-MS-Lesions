@@ -2,15 +2,30 @@
 
 ## Introduction
 
-This repository provides easy to use access to our HD-MS-Lesions brain lesion segmentation tool.
+This repository provides easy to use access to our HD-MS-Lesions brain segmentation tool.
 HD-MS-Lesions is the result of a joint project between the Department of Neuroradiology at the Heidelberg University Hospital, Germany and the Division of Medical Image Computing at the German Cancer Research Center (DKFZ) Heidelberg, Germany.
 If you are using HD-MS-Lesions, please cite the following publications:
 
-HD-MS-Lesions was developed with **TBD** MRI images from **TBD** MS patients (**TBD** Datasetsplit , trained in a 5 fold crossvalidation setting)
+1. Brugnara, G., Isensee, F., Neuberger, U. et al. Automated volumetric assessment with artificial neural networks might enable a more accurate assessment of disease burden in patients with multiple sclerosis.
+   Eur Radiol 30, 2356–2364 (2020). https://doi.org/10.1007/s00330-019-06593-y
+   
+2. Isensee, F., Jaeger, P. F., Kohl, S. A., Petersen, J., & Maier-Hein, K. H. (2020). nnU-Net: a self-configuring method 
+for deep learning-based biomedical image segmentation. Nature Methods, 1-9.
 
-We provide two models that are capable to predict MS Lesions for patients that were imaged with different modalities:
-1. MRI imaging with precontrast T1-weighted, postcontrast T1-weighted, T2-weighted and FLAIR sequence, and
-2. MRI imaging with precontrast T1-weighted, T2-weighted and FLAIR sequence.
+
+HD-MS-Lesions was developed with 416 patients with clinically diagnosed MS at any disease stage,
+treated at the Heidelberg University Hospital (Heidelberg, Germany) and who underwent standardized
+MRI at the Department of Neuroradiology in the period from January 2010 to December 2016. The patients were assigned to either training or test set with a 4:1 ratio.
+Specifically, the training set consisted of n = 334 patients (with n = 334 MRI exams, i.e.,one exam per patient) at any point in the disease course,
+whereas the longitudinal test set consisted of n = 88 patients (with n = 266 MRI exams, i.e., acquired at multiple time points for each patient (mean of 3 scans per patient (range 2–8)).
+
+MRI exams were acquired with a 3-T MR imaging system (Magnetom Verio, Skyra or Trio TIM; Siemens Healthcare) and a 12-channel head matrix coil,
+and included 3D MPRAGE T1-weighted images before (T1-w) and after (cT1-w) the contrast agent administration as well as 2D axial fluid-attenuated inversion recovery (FLAIR)
+and 2D axial T2-weighted (T2-w) images. For acquisition parameters checkout the first paper ([Brugnara et al. 2020](https://doi.org/10.1007/s00330-019-06593-y)).
+
+Given these modalities we provide two models that are capable to predict MS Lesions for patients:
+1. For patients imaged with T1-weighted, contrast enhanced T1-weighted, T2-weighted and FLAIR sequence we predict ce and T2/FLAIR lesions,  
+2. for patients imaged with T1-weighted, T2-weighted and FLAIR sequence we predict only T2/FLAIR lesions.
 
 
 ## Installation Instructions
