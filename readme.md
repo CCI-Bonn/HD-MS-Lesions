@@ -3,7 +3,8 @@
 ## Introduction
 
 This repository provides easy to use access to our HD-MS-Lesions brain segmentation tool.
-HD-MS-Lesions is the result of a joint project between the Department of Neuroradiology at the Heidelberg University Hospital, Germany and the Division of Medical Image Computing at the German Cancer Research Center (DKFZ) Heidelberg, Germany.
+HD-MS-Lesions is the result of a joint project between the Department of Neuroradiology at the Heidelberg University Hospital,
+Germany and the Division of Medical Image Computing at the German Cancer Research Center (DKFZ) Heidelberg, Germany.
 If you are using HD-MS-Lesions, please cite the following publications:
 
 1. Brugnara, G., Isensee, F., Neuberger, U. et al. Automated volumetric assessment with artificial neural networks might enable a more accurate assessment of disease burden in patients with multiple sclerosis.
@@ -16,7 +17,7 @@ for deep learning-based biomedical image segmentation. Nature Methods, 1-9.
 HD-MS-Lesions was developed with 416 patients with clinically diagnosed MS at any disease stage,
 treated at the Heidelberg University Hospital (Heidelberg, Germany) and who underwent standardized
 MRI at the Department of Neuroradiology in the period from January 2010 to December 2016. The patients were assigned to either training or test set with a 4:1 ratio.
-Specifically, the training set consisted of n = 334 patients (with n = 334 MRI exams, i.e.,one exam per patient) at any point in the disease course,
+Specifically, the training set consisted of n = 334 patients (with n = 334 MRI exams, i.e., one exam per patient) at any point in the disease course,
 whereas the longitudinal test set consisted of n = 88 patients (with n = 266 MRI exams, i.e., acquired at multiple time points for each patient (mean of 3 scans per patient (range 2–8)).
 
 MRI exams were acquired with a 3-T MR imaging system (Magnetom Verio, Skyra or Trio TIM; Siemens Healthcare) and a 12-channel head matrix coil,
