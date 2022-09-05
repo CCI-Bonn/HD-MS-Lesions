@@ -17,7 +17,8 @@ setup(name='ms_lesions',
       install_requires=[
           'torch',
           'nnunet>1.0',
-          'batchgenerators'
+          'batchgenerators',
+          'matplotlib'
       ],
       entry_points={
           'console_scripts': [

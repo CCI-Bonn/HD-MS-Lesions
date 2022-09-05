@@ -22,7 +22,7 @@ whereas the longitudinal test set consisted of n = 88 patients (with n = 266 MRI
 
 MRI exams were acquired with a 3-T MR imaging system (Magnetom Verio, Skyra or Trio TIM; Siemens Healthcare) and a 12-channel head matrix coil,
 and included 3D MPRAGE T1-weighted images before (T1-w) and after (cT1-w) the contrast agent administration as well as 2D axial fluid-attenuated inversion recovery (FLAIR)
-and 2D axial T2-weighted (T2-w) images. For acquisition parameters checkout the first paper ([Brugnara et al. 2020](https://doi.org/10.1007/s00330-019-06593-y)).
+and 2D axial T2-weighted (T2-w) images. For acquisition parameters checkout this paper ([Brugnara et al. 2020](https://doi.org/10.1007/s00330-019-06593-y)).
 
 Given these modalities we provide two models that are capable to predict MS Lesions for patients:
 1. For patients imaged with T1-weighted, contrast enhanced T1-weighted, T2-weighted and FLAIR sequence we predict ce and T2/FLAIR lesions,  
