@@ -163,7 +163,7 @@ The models take multiple modalities as input, which have to be formatted in a nn
 See [original nnUNet docu](https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_conversion.md) for more information about that.
 
 For cases that are imaged with T1, cT1, T2 and FLAIR the `MODALITY_ID` has to be: `{T1: 0000, cT1: 0001, T2: 0002, FLAIR: 0003}`, for the corresponding modality.
-For cases imaged __without__ cT1 modality the `MODALITY_ID` has to be: `{T1: 0000, T2: 0001, FLAIR: 0002}`, for the corresponding modalities.
+For cases imaged __without__ cT1 modality the `MODALITY_ID` has to be: `{T1: 0000, FLAIR: 0001, T2: 0002}`, for the corresponding modalities.
 The user has to confirm this when running or skip the check by using the `--skip_modality_check 1` option. 
 
 ### Predicting a single case
